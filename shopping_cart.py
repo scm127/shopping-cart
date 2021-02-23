@@ -40,9 +40,10 @@ def to_usd(my_price):
 # TODO: write some Python code here to produce the desired output
 while True:   
     user_input= input("Please input a user idenifier, or 'DONE' if there are no more items:")
-    items = [p for p in products if str(p["id"])==str(user_input)]
-    item=items[0]
     if user_input=="DONE":
-        break
-    print("Selected project: " + item["name"]+" "+str(item["price"]))
-     
+        break()
+    else:
+        items = [p for p in products if str(p["id"])==str(user_input)]
+        item=items[0]
+        print("Selected project: " + item["name"]+" "+str(item["price"]))
+      
