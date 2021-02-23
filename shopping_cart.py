@@ -1,4 +1,5 @@
 # shopping_cart.py
+from datetime import datetime
 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -53,7 +54,10 @@ print("GREEN FOODS GROCERY")
 print("WWW.GREEN-FOODS-GROCERY.COM")
 
 print("-----------------")
-print("Checkout at: ")
+now=datetime.now()
+print("Checkout at: "+ str(now))
+dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+print("date and time =", dt_string)
 print("-----------------")
 print("Selected Products:")
 for selected_item in selected_items:
