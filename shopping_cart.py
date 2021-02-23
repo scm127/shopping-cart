@@ -42,17 +42,26 @@ def to_usd(my_price):
 total_price=0
 selected_items=[]
 while True:   
-    user_input= input("Please input a user idenifier, or 'DONE' if there are no more items:")
+    user_input = input("Please input a user idenifier, or 'DONE' if there are no more items:")
     if user_input=="DONE":
         break
     else:
         selected_items.append(user_input)
 
-
+print("-----------------")
+print("GREEN FOODS GROCERY")
+print("-----------------")
+print("Checkout at: ")
+print("-----------------")
+print("Selected Products:")
 for selected_item in selected_items:
 
-    items = [p for p in products if str(p["id"])==str(user_input)]
+    items = [p for p in products if str(p["id"]) == str(selected_item)]
     item=items[0]
     total_price=total_price+item["price"]
-    print("Selected project: " + item["name"]+" "+str(item["price"]))
-print("The total price is:" + str(total_price))     
+    print("..."+item["name"]+" "+str(to_usd(item["price"])))
+
+print("-----------------")
+print("SUBTOTAL:" + str(to_usd(total_price)))    
+print("Tax:" + str(to_usd(total_price*.0857)))    
+print("Tax::" + str(to_usd(total_price*.0857)))    
