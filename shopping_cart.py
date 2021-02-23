@@ -50,6 +50,8 @@ while True:
 
 print("-----------------")
 print("GREEN FOODS GROCERY")
+print("WWW.GREEN-FOODS-GROCERY.COM")
+
 print("-----------------")
 print("Checkout at: ")
 print("-----------------")
@@ -59,9 +61,12 @@ for selected_item in selected_items:
     items = [p for p in products if str(p["id"]) == str(selected_item)]
     item=items[0]
     total_price=total_price+item["price"]
-    print("..."+item["name"]+" "+str(to_usd(item["price"])))
+    print("... "+item["name"]+" ("+str(to_usd(item["price"]))+")")
 
 print("-----------------")
 print("SUBTOTAL:" + str(to_usd(total_price)))    
 print("Tax:" + str(to_usd(total_price*.0857)))    
 print("Total:" + str(to_usd(total_price*1.0857)))
+print("-----------------")
+print("THANKS, SEE YOU AGAIN SOON!")
+print("-----------------")
