@@ -39,5 +39,6 @@ def to_usd(my_price):
 
 # TODO: write some Python code here to produce the desired output
 user_input= input("Please input a user idenifier, or 'DONE' if there are no more items:")
-item = [p for p in products if str(p["id"])==str(user_input)]
-print(item)
+items = [p for p in products if str(p["id"])==str(user_input)]
+item=items[0]
+print("Selected project: " + item["name"]+" "+str(item["price"]))
