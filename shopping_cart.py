@@ -38,12 +38,21 @@ def to_usd(my_price):
 
 
 # TODO: write some Python code here to produce the desired output
+# I wrote this code with help from Professor Rosetti's Shopping Cart Walkthrough
+total_price=0
+selected_items=[]
 while True:   
     user_input= input("Please input a user idenifier, or 'DONE' if there are no more items:")
     if user_input=="DONE":
-        break()
+        break
     else:
-        items = [p for p in products if str(p["id"])==str(user_input)]
-        item=items[0]
-        print("Selected project: " + item["name"]+" "+str(item["price"]))
-      
+        selected_items.append(user_input)
+
+
+for selected_item in selected_items:
+
+    items = [p for p in products if str(p["id"])==str(user_input)]
+    item=items[0]
+    total_price=total_price+item["price"]
+    print("Selected project: " + item["name"]+" "+str(item["price"]))
+print("The total price is:" + str(total_price))     
