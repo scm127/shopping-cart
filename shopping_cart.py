@@ -64,4 +64,4 @@ for selected_item in selected_items:
 print("-----------------")
 print("SUBTOTAL:" + str(to_usd(total_price)))    
 print("Tax:" + str(to_usd(total_price*.0857)))    
-print("Tax::" + str(to_usd(total_price*.0857)))    
+print("Total:" + str(to_usd(total_price*1.0857)))
