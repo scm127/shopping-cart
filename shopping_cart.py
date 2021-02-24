@@ -1,5 +1,5 @@
 # shopping_cart.py
-from datetime import datetime
+import time
 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -40,6 +40,7 @@ def to_usd(my_price):
 
 # TODO: write some Python code here to produce the desired output
 # I wrote this code with help from Professor Rosetti's Shopping Cart Walkthrough
+# The try/ except statement was written with help from https://medium.com/better-programming/how-to-indefinitely-request-user-input-until-valid-in-python-388a7c85aa6e
 total_price=0
 selected_items=[]
 while True:   
@@ -47,17 +48,26 @@ while True:
     if user_input=="DONE":
         break
     else:
-        selected_items.append(user_input)
+        try:
+            if int(user_input)<0:
+                print("enter a valid input")
+            else:
+                if int(user_input) <=len(products):
+                    selected_items.append(user_input)
+                else:
+                    print("please enter a valid input and try again")
+  
+        except:
+            print("please enter a valid input")
 
 print("-----------------")
 print("GREEN FOODS GROCERY")
 print("WWW.GREEN-FOODS-GROCERY.COM")
 
 print("-----------------")
-now=datetime.now()
-print("Checkout at: "+ str(now))
-dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-print("date and time =", dt_string)
+# Date and time code was written with help from : https://www.cyberciti.biz/faq/howto-get-current-date-time-in-python/
+dt_string = time.strftime("%m/%d/%Y %I:%M %p")
+print("Checkout at: ", dt_string)
 print("-----------------")
 print("Selected Products:")
 for selected_item in selected_items:
@@ -69,8 +79,8 @@ for selected_item in selected_items:
 
 print("-----------------")
 print("SUBTOTAL:" + str(to_usd(total_price)))    
-print("Tax:" + str(to_usd(total_price*.0857)))    
-print("Total:" + str(to_usd(total_price*1.0857)))
+print("Tax:" + str(to_usd(total_price*.0875)))    
+print("Total:" + str(to_usd(total_price*1.0875)))
 print("-----------------")
 print("THANKS, SEE YOU AGAIN SOON!")
 print("-----------------")
