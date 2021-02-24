@@ -50,15 +50,15 @@ while True:
     else:
         try:
             if int(user_input)<0:
-                print("enter a valid input")
+                print("There are no negative product idetifiers. Please enter a valid input. ")
             else:
                 if int(user_input) <=len(products):
                     selected_items.append(user_input)
                 else:
-                    print("please enter a valid input and try again")
+                    print("We do not have any products matching that identifier. Please enter a valid input")
   
         except:
-            print("please enter a valid input")
+            print("Please enter a valid product identifier")
 
 print("-----------------")
 print("GREEN FOODS GROCERY")
