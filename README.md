@@ -26,6 +26,26 @@ From inside the virtual environment, install package dependencies. The requirmem
 ```sh
 pip install -r requirements.txt
 ```
+# Create and activate virtual enviorment
+Use Anaconda to create and activate a new virtual environment, perhaps called "my-game-env":
+
+```sh
+conda create -n my-game-env python=3.8
+conda activate my-game-env
+```
+
+From inside the virtual environment, install package dependencies. The requirmemnts.txt file has the Dotenv  package which is needed to load enviorment variables:
+```sh
+pip install -r requirements.txt
+```
+# Setup tax rate
+In the root directory of your local repository, create a new file called ".env", and update the contents of the ".env" file to specify the  tax rate. The user can also variables SENDGRID_API_KEY and SENDER_ADDRESS if they want an email of their receipt. To get the SENDGRIP_API_KEY they must make an account on SendGrid. :
+
+```sh
+tax_rate=.0875
+SENDGRID_API_KEY=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
+SENDER_ADDRESS=scm127@georgetown.edu
+```
 
 # Run the Shopping Cart Python Script and follow the instructions to input product identifiers the desired products:
 ```sh

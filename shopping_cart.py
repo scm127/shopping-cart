@@ -1,5 +1,10 @@
 # shopping_cart.py
 import time
+import os
+from dotenv import load_dotenv
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+load_dotenv()
 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -43,13 +48,14 @@ def to_usd(my_price):
 # The try/ except statement was written with help from https://medium.com/better-programming/how-to-indefinitely-request-user-input-until-valid-in-python-388a7c85aa6e
 total_price=0
 selected_items=[]
+tax_rate=os.getenv("tax_rate", default=".0875")
 while True:   
-    user_input = input("Please input a user idenifier, or 'DONE' if there are no more items:")
+    user_input = input("Please input a product idenifier, or 'DONE' if there are no more items:")
     if user_input=="DONE":
         break
     else:
         try:
-            if int(user_input)<0:
+            if int(user_input)<=0:
                 print("There are no negative product idetifiers. Please enter a valid input. ")
             else:
                 if int(user_input) <=len(products):
@@ -63,6 +69,7 @@ while True:
 print("-----------------")
 print("GREEN FOODS GROCERY")
 print("WWW.GREEN-FOODS-GROCERY.COM")
+print("Store number: 203-249-0890")
 
 print("-----------------")
 # Date and time code was written with help from : https://www.cyberciti.biz/faq/howto-get-current-date-time-in-python/
@@ -75,12 +82,46 @@ for selected_item in selected_items:
     items = [p for p in products if str(p["id"]) == str(selected_item)]
     item=items[0]
     total_price=total_price+item["price"]
-    print("... "+item["name"]+" ("+str(to_usd(item["price"]))+")")
+    print("... "+item["name"]+" ("+to_usd(item["price"])+")")
 
 print("-----------------")
 print("SUBTOTAL:" + str(to_usd(total_price)))    
-print("Tax:" + str(to_usd(total_price*.0875)))    
-print("Total:" + str(to_usd(total_price*1.0875)))
+print("Tax:" + str(to_usd(total_price*float(tax_rate))))    
+print("Total:" + str(to_usd(total_price*(1+float(tax_rate)))))
 print("-----------------")
 print("THANKS, SEE YOU AGAIN SOON!")
 print("-----------------")
+
+print("")
+print("")
+
+
+
+
+
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", default="OOPS, please set env var called 'SENDGRID_API_KEY'")
+SENDER_ADDRESS = os.getenv("SENDER_ADDRESS", default="OOPS, please set env var called 'SENDER_ADDRESS'")
+
+client = SendGridAPIClient(SENDGRID_API_KEY) #> <class 'sendgrid.sendgrid.SendGridAPIClient>
+print("CLIENT:", type(client))
+
+subject = "Your Receipt from the Green Grocery Store"
+
+html_content = "Thanks for shopping with us today. Please shop again soon"
+print("HTML:", html_content)
+
+# FYI: we'll need to use our verified SENDER_ADDRESS as the `from_email` param
+# ... but we can customize the `to_emails` param to send to other addresses
+message = Mail(from_email=SENDER_ADDRESS, to_emails=SENDER_ADDRESS, subject=subject, html_content=html_content)
+
+try:
+    response = client.send(message)
+
+    print("RESPONSE:", type(response)) #> <class 'python_http_client.client.Response'>
+    print(response.status_code) #> 202 indicates SUCCESS
+    print(response.body)
+    print(response.headers)
+
+except Exception as err:
+    print(type(err))
+    print(err)
