@@ -40,5 +40,5 @@ SENDER_ADDRESS=scm127@georgetown.edu
 ```sh
 python shopping_cart.py
 ```
-Note that if anything something is inputed that is not a product idetifier, the user will be asked to please input a valid product identifier.  
+Note that if anything something is inputed that is not a product idetifier, the user will be asked to please input a valid product identifier.  Once all the desired identifiers are input, input "DONE".
 
